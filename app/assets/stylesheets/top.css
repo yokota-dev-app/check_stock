@@ -1,7 +1,7 @@
 .top-wrapper {
   background-image: none;
   background-color: #e2e9e6;
-  min-height: calc(100vh - 72px);
+  flex: 1 0 auto;
   display: grid;
   place-items: center;
   padding: 48px 24px;
@@ -34,11 +34,37 @@
   color: #fff;
   font: inherit;
   cursor: pointer;
+  transition: transform 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
+}
+
+.top-inner-text button:hover {
+  background: #285346;
+  box-shadow: 0 3px 8px rgb(24 51 45 / 18%);
+}
+
+.top-inner-text button:active {
+  transform: translateY(2px) scale(0.98);
+  box-shadow: none;
+}
+
+.top-inner-text button:focus-visible {
+  outline: 3px solid #287c68;
+  outline-offset: 3px;
 }
 
 .top-inner-text button + button {
   background: transparent;
   color: #18332d;
+}
+
+.top-inner-text button + button:hover {
+  background: #d4e0da;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-inner-text button {
+    transition: none;
+  }
 }
 
 @media (max-width: 600px) {

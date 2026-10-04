@@ -1,0 +1,22 @@
+.site-footer {
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 1;
+  border-bottom: 1px solid #d6dfda;
+  background: #fff;
+}
+
+.site-footer-div {
+  display: flex;
+  min-height: 36px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.copyright p {
+  margin: 0;
+  font-size: 0.8rem;
+}
