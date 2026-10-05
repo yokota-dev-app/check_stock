@@ -12,15 +12,18 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+/* ヘッダー全体 */
 .site-header {
   flex: 0 0 auto;
   position: relative;
-  z-index: 1;
+  z-index: 100;
   border-bottom: 1px solid #d6dfda;
   background: #fff;
 }
 
-.site-nav {
+/* ナビゲーションバーのコンテナ（ログイン前: .site-nav / ログイン後: .header-nav の両方に対応） */
+.site-nav,
+.header-nav {
   display: flex;
   min-height: 72px;
   max-width: 1120px;
@@ -30,6 +33,7 @@ body {
   justify-content: space-between;
 }
 
+/* ブランドロゴ */
 .site-brand {
   color: inherit;
   font-size: 1.2rem;
@@ -37,7 +41,9 @@ body {
   text-decoration: none;
 }
 
-.site-nav-login {
+/* メインメニュー & ログイン前メニュー（どちらのクラス名でも同様に配置） */
+.site-nav-login,
+.nav-menu {
   display: flex;
   margin: 0;
   padding: 0;
@@ -46,7 +52,86 @@ body {
   list-style: none;
 }
 
-.site-nav-login a {
+/* リンク共通設定 */
+.site-nav-login a,
+.nav-link {
+  display: flex;
+  align-items: center;
   color: inherit;
   text-decoration: none;
+  padding: 8px 0;
+}
+
+.site-nav-login a:hover,
+.nav-link:hover {
+  opacity: 0.8;
+}
+
+/* 各親メニュー項目（ログイン後） */
+.nav-item {
+  position: relative; /* ドロップダウンメニューの位置基準 */
+}
+
+/* プロフィール画像 */
+.profile-icon {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ドロップダウンメニュー基本スタイル */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none; /* 初期状態は非表示 */
+  min-width: 80px;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+  background-color: #fff;
+  border: 1px solid #d6dfda;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* 右寄せドロップダウンメニュー */
+.dropdown-menu-right {
+  left: auto;
+  right: 0;
+}
+
+/* 親要素ホバー時にドロップダウンを表示 */
+.has-dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* ドロップダウン内の各アイテム */
+.dropdown-item {
+  display: block;
+  padding: 8px 16px;
+  color: #18332d;
+  font-size: 0.9rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f4f2;
+}
+
+/* ユーザー名表記 */
+.dropdown-user-name {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #5d756f;
+  white-space: nowrap;
+}
+
+/* 区切り線 */
+.dropdown-divider {
+  height: 1px;
+  margin: 4px 0;
+  background-color: #d6dfda;
 }

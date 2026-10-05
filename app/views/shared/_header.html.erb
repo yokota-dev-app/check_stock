@@ -1,8 +1,33 @@
 <header class="site-header">
-  <nav class="site-nav" aria-label="メインナビゲーション">
-    <a class="site-brand" href="/">PackReady</a>
-    <ul class="site-nav-login">
-      <li><a href="/">ログイン</a></li>
+  <nav class="header-nav">
+    <%= link_to root_path, class: "site-brand" do %>
+      PackReady
+    <% end %>
+
+    <ul class="nav-menu">
+      <li class="nav-item has-dropdown">
+        <%= link_to '持ち物リスト', '#', class: 'nav-link' %>
+        <ul class="dropdown-menu">
+          <li><%= link_to '一覧', '#', class: 'dropdown-item' %></li>
+          <li><%= link_to '作成', '#', class: 'dropdown-item' %></li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to 'ブックマーク一覧', '#', class: 'nav-link' %>
+      </li>
+
+      <li class="nav-item has-dropdown">
+        <%= link_to '#', class: 'nav-link profile-link' do %>
+          <%= image_tag 'sample.jpg', class: 'profile-icon', width: '40', height: '40', alt: 'プロフィール画像' %>
+        <% end %>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li class="dropdown-user-name">らんてっく たろう</li>
+          <li class="dropdown-divider"></li>
+          <li><%= link_to 'プロフィール', '#', class: 'dropdown-item' %></li>
+          <li><%= link_to 'ログアウト', logout_path, class: 'dropdown-item', data: { turbo_method: :delete } %></li>
+        </ul>
+      </li>
     </ul>
   </nav>
 </header>

@@ -1,0 +1,13 @@
+<header class="site-header">
+  <nav class="site-nav" aria-label="メインナビゲーション">
+    <%= link_to root_path, class: "site-brand" do %>
+      PackReady
+    <% end %>
+    <%# <a class="site-brand" href="/">PackReady</a> %>
+    <ul class="site-nav-login">
+      <li>
+        <%= link_to 'ログイン', login_path %>
+      </li>
+    </ul>
+  </nav>
+</header>
