@@ -22,7 +22,7 @@
           <%= image_tag 'sample.jpg', class: 'profile-icon', width: '40', height: '40', alt: 'プロフィール画像' %>
         <% end %>
         <ul class="dropdown-menu dropdown-menu-right">
-          <li class="dropdown-user-name">らんてっく たろう</li>
+          <li class="dropdown-user-name"><%= current_user.decorate.full_name %></li>
           <li class="dropdown-divider"></li>
           <li><%= link_to 'プロフィール', '#', class: 'dropdown-item' %></li>
           <li><%= link_to 'ログアウト', logout_path, class: 'dropdown-item', data: { turbo_method: :delete } %></li>
