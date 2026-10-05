@@ -18,6 +18,17 @@
                 %>
               <% end %>
               <p class="listd-memo"><%= list.memo %></p>
+              <%= form_with url: list_items_path(list), scope: :item, class: "item-add-form" do |item_form| %>
+                <%= item_form.text_field :name,
+                      value: @new_item_list_id == list.id ? @new_item_name : nil,
+                      placeholder: "追加する項目",
+                      aria: { label: "追加する項目" }
+                %>
+                <%= item_form.submit "追加" %>
+              <% end %>
+              <% if @new_item_list_id == list.id && @new_item_errors.present? %>
+                <p class="item-add-errors"><%= @new_item_errors.to_sentence %></p>
+              <% end %>
               <ul>
                 <% list.items.each do |item| %>
                   <li>

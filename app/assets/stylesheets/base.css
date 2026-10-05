@@ -62,6 +62,37 @@
   background: #d4e0da;
 }
 
+.item-add-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.item-add-form input[type="text"] {
+  min-width: 0;
+  flex: 1;
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #aabbb2;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.item-add-form input[type="submit"] {
+  min-height: 40px;
+  padding: 0 18px;
+  border: 1px solid #18332d;
+  border-radius: 4px;
+  background: #18332d;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.item-add-errors {
+  color: #a32222;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .guide-area .guide-button {
     transition: none;
