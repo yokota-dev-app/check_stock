@@ -16,6 +16,12 @@ class ListsController < ApplicationController
     end
   end
 
+  def destroy
+    list = current_user.lists.find(params[:id])
+    list.destroy!
+    redirect_to lists_path, status: :see_other
+  end
+
   private
 
   def list_params
