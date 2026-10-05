@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[new create]
   resources :lists, only: %i[index new create destroy] do
-    resources :items, only: %i[destroy]
+    resources :items, only: %i[update destroy]
   end
 
   get 'login', to: 'user_sessions#new'

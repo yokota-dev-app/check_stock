@@ -21,10 +21,23 @@
               <ul>
                 <% list.items.each do |item| %>
                   <li>
-                    <label>
-                      <%= check_box_tag "item_#{item.id}", "1", item.is_checked %>
-                      <%= item.name %>
-                    </label>
+                    <%= form_with model: [list, item], data: {
+                          controller: "item-autosave",
+                          action: "focusout->item-autosave#focusout keydown.enter->item-autosave#save turbo:submit-end->item-autosave#submitted"
+                        } do |item_form| %>
+                      <%= item_form.check_box :is_checked,
+                            id: "item-checked-#{item.id}",
+                            data: {
+                              item_autosave_target: "checked",
+                              action: "change->item-autosave#save"
+                            }
+                      %>
+                      <%= item_form.text_field :name,
+                            required: true,
+                            aria: { label: "チェック項目名" },
+                            data: { item_autosave_target: "field" }
+                      %>
+                    <% end %>
                     <%= button_to "削除", list_item_path(list, item),
                           method: :delete,
                           id: "button-delete-item-#{item.id}",
