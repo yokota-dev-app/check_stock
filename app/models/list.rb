@@ -3,4 +3,5 @@ class List < ApplicationRecord
   validates :memo, length: { maximum: 65_535 }
 
   belongs_to :user
+  has_many :items, dependent: :destroy
 end
