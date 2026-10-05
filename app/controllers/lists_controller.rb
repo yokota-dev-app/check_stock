@@ -5,6 +5,7 @@ class ListsController < ApplicationController
 
   def new
     @list = List.new
+    @list.items.build
   end
 
   def create
@@ -12,6 +13,7 @@ class ListsController < ApplicationController
     if @list.save
       redirect_to lists_path
     else
+      @list.items.build if @list.items.empty?
       render :new, status: :unprocessable_entity
     end
   end
@@ -25,6 +27,6 @@ class ListsController < ApplicationController
   private
 
   def list_params
-    params.require(:list).permit(:title, :memo)
+    params.require(:list).permit(:title, :memo, items_attributes: [:name])
   end
 end

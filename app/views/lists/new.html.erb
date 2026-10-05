@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-8 offset-lg-2">
       <h1>新規リスト作成</h1>
-      <%= form_with model: @list, class: "new_list" do |f| %>
+      <%= form_with model: @list, class: "new_list", data: { controller: "nested-items" } do |f| %>
         <div class="mb-3">
           <%= f.label :title %>
           <%= f.text_field :title, class: "form-control" %>
@@ -11,6 +11,23 @@
           <%= f.label :memo %>
           <%= f.text_area :memo, class: "form-control", rows: "10" %>
         </div>
+        <div data-nested-items-target="fields">
+          <%= f.fields_for :items do |item_fields| %>
+            <div class="mb-3" data-item-field>
+              <%= item_fields.label :name, "チェック項目" %>
+              <%= item_fields.text_field :name, class: "form-control" %>
+            </div>
+          <% end %>
+        </div>
+        <template data-nested-items-target="template">
+          <%= f.fields_for :items, Item.new, child_index: "NEW_RECORD" do |item_fields| %>
+            <div class="mb-3" data-item-field>
+              <%= item_fields.label :name, "チェック項目" %>
+              <%= item_fields.text_field :name, class: "form-control" %>
+            </div>
+          <% end %>
+        </template>
+        <button type="button" data-action="nested-items#add">項目を追加</button>
         <%= f.submit nil, class: "btn btn-primary" %>
       <% end %>
     </div>

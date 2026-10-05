@@ -19,9 +19,14 @@
               <% end %>
               <p class="listd-memo"><%= list.memo %></p>
               <ul>
-                <li><label><input type="checkbox"> 項目 1</label></li>
-                <li><label><input type="checkbox"> 項目 2</label></li>
-                <li><label><input type="checkbox" checked> 最初からチェック済みの項目</label></li>
+                <% list.items.each do |item| %>
+                  <li>
+                    <label>
+                      <%= check_box_tag "item_#{item.id}", "1", item.is_checked %>
+                      <%= item.name %>
+                    </label>
+                  </li>
+                <% end %>
               </ul>
             </div>
           </div>
