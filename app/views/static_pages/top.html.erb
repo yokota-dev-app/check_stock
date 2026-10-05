@@ -1,9 +1,12 @@
 <div class='top-wrapper'>
-  <div class='top-inner-text'>
+  <div class='guide-area'>
     <h1>PackReady</h1>
     <p>出張・旅行・イベントごとの持ち物リストを作成・管理</p>
     <p>チェック形式で準備を進められます。</p>
-    <button>ログイン</button>
-    <button>新規登録</button>
+    <% if logged_in? %>
+    <% else %>
+      <%= link_to 'ログイン', login_path, class: "guide-button" %>
+      <%= link_to '新規登録', new_user_path, class: "guide-button" %>
+    <% end %>
   </div>
 </div>

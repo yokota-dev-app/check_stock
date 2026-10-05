@@ -7,68 +7,69 @@
   padding: 48px 24px;
 }
 
-.top-wrapper .top-inner-text {
+.top-wrapper .guide-area {
   color: #18332d;
   max-width: 760px;
   text-align: center;
 }
 
-.top-inner-text h1 {
+.guide-area h1 {
   margin: 0 0 20px;
   font-size: 2.5rem;
 }
 
-.top-inner-text p {
+.guide-area p {
   margin: 0 auto 28px;
   max-width: 620px;
   line-height: 1.8;
 }
 
-.top-inner-text button {
+.guide-area .guide-button {
   min-height: 44px;
   margin: 0 6px;
-  padding: 0 20px;
+  padding: 10px 20px;
   border: 1px solid #18332d;
-  border-radius: 4px;
+  border-radius: 10px;
   background: #18332d;
   color: #fff;
   font: inherit;
   cursor: pointer;
+  text-decoration: none;
   transition: transform 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
 }
 
-.top-inner-text button:hover {
+.guide-area .guide-button:hover {
   background: #285346;
   box-shadow: 0 3px 8px rgb(24 51 45 / 18%);
 }
 
-.top-inner-text button:active {
+.guide-area .guide-button:active {
   transform: translateY(2px) scale(0.98);
   box-shadow: none;
 }
 
-.top-inner-text button:focus-visible {
+.guide-area .guide-button:focus-visible {
   outline: 3px solid #287c68;
   outline-offset: 3px;
 }
 
-.top-inner-text button + button {
+.guide-area .guide-button + .guide-button {
   background: transparent;
   color: #18332d;
 }
 
-.top-inner-text button + button:hover {
+.guide-area .guide-button + .guide-button:hover {
   background: #d4e0da;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .top-inner-text button {
+  .guide-area .guide-button {
     transition: none;
   }
 }
 
 @media (max-width: 600px) {
-  .top-inner-text h1 {
+  .guide-area h1 {
     font-size: 2rem;
   }
 }

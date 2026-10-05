@@ -8,7 +8,7 @@ class UserSessionsController < ApplicationController
 
     if @user
       session[:user_id] = @user.id
-      redirect_to root_path
+      redirect_to lists_path
     else
       render :new
     end
