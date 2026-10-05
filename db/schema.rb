@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_05_083211) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_05_143258) do
   create_table "items", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.boolean "is_checked", default: false, null: false
@@ -30,6 +30,25 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_05_083211) do
     t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
+  create_table "template_items", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "is_checked", default: false, null: false
+    t.bigint "template_list_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["template_list_id"], name: "index_template_items_on_template_list_id"
+  end
+
+  create_table "template_lists", charset: "utf8mb4", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "memo"
+    t.integer "category"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_template_lists_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -42,4 +61,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_05_083211) do
 
   add_foreign_key "items", "lists"
   add_foreign_key "lists", "users"
+  add_foreign_key "template_items", "template_lists"
+  add_foreign_key "template_lists", "users"
 end
