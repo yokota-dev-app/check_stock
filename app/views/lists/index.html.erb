@@ -25,6 +25,12 @@
                       <%= check_box_tag "item_#{item.id}", "1", item.is_checked %>
                       <%= item.name %>
                     </label>
+                    <%= button_to "削除", list_item_path(list, item),
+                          method: :delete,
+                          id: "button-delete-item-#{item.id}",
+                          class: "item-delete-button",
+                          form: { data: { turbo_confirm: "この項目を削除しますか？" } }
+                    %>
                   </li>
                 <% end %>
               </ul>
