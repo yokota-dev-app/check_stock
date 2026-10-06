@@ -69,9 +69,10 @@
                     } do |template_item_form| %>
                   <%= template_item_form.check_box :is_checked,
                         id: "template_item-checked-#{template_item.id}",
+                        disabled: true,
                         data: {
                           template_item_autosave_target: "checked",
-                          action: "change->template_item-autosave#save"
+                          # action: "change->template_item-autosave#save"
                         }
                   %>
                   <%= template_item_form.text_field :name,

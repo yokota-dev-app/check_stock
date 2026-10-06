@@ -6,19 +6,11 @@
 
     <ul class="nav-menu">
       <li class="nav-item has-dropdown">
-        <%= link_to '持ち物リスト', '#', class: 'nav-link' %>
-        <ul class="dropdown-menu">
-          <li><%= link_to '一覧', lists_path, class: 'dropdown-item' %></li>
-          <li><%= link_to '作成', new_list_path, class: 'dropdown-item' %></li>
-        </ul>
+        <%= link_to '持ち物リスト', lists_path, class: 'nav-link' %>
       </li>
 
       <li class="nav-item has-dropdown">
-        <%= link_to 'テンプレート', '#', class: 'nav-link' %>
-        <ul class="dropdown-menu">
-          <li><%= link_to '一覧', template_lists_path, class: 'dropdown-item' %></li>
-          <li><%= link_to '作成', new_template_list_path, class: 'dropdown-item' %></li>
-        </ul>
+        <%= link_to 'テンプレート', template_lists_path, class: 'nav-link' %>
       </li>
 
       <li class="nav-item has-dropdown">
