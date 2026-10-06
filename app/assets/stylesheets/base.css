@@ -93,6 +93,204 @@
   color: #a32222;
 }
 
+.lists-page {
+  display: grid;
+  width: min(1200px, 100%);
+  min-height: 0;
+  flex: 1 0 auto;
+  margin: 0 auto;
+  grid-template-columns: minmax(260px, 0.36fr) minmax(0, 0.64fr);
+  color: #18332d;
+}
+
+.list-sidebar {
+  min-height: 0;
+  padding: 28px 20px;
+  overflow-y: auto;
+  border-right: 1px solid #d6dfda;
+  background: #f7f9f8;
+}
+
+.list-sidebar-header,
+.list-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.list-sidebar-header {
+  margin-bottom: 20px;
+}
+
+.list-sidebar-header h1,
+.list-detail-header h2 {
+  margin: 0;
+}
+
+.list-picker-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 8px;
+  list-style: none;
+}
+
+.list-picker-row {
+  display: grid;
+  padding: 10px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px 10px;
+  border: 1px solid #d6dfda;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.list-picker-option {
+  display: flex;
+  min-width: 0;
+  padding: 4px 2px;
+  grid-column: 1 / -1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.list-picker-option[aria-pressed="true"] .list-picker-title {
+  font-weight: 700;
+}
+
+.list-picker-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.list-picker-state,
+.list-detail-eyebrow {
+  color: #5b7167;
+  font-size: 0.85rem;
+}
+
+.list-completion-form {
+  margin: 0;
+}
+
+.list-completion-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.list-delete-button,
+.list-template-button {
+  margin: 0;
+}
+
+.list-delete-button button,
+.list-template-button button {
+  min-height: 36px;
+  padding: 0 10px;
+  border: 1px solid #aabbb2;
+  border-radius: 4px;
+  background: #fff;
+  color: #18332d;
+  font: inherit;
+  cursor: pointer;
+}
+
+.list-detail-pane {
+  min-width: 0;
+  min-height: 0;
+  padding: 36px clamp(20px, 5vw, 56px);
+  overflow-y: auto;
+}
+
+.list-detail[hidden] {
+  display: none;
+}
+
+.list-detail-header {
+  margin-bottom: 20px;
+}
+
+.list-detail-eyebrow {
+  margin: 0 0 6px;
+}
+
+.list-detail-header h2 {
+  overflow-wrap: anywhere;
+  font-size: 1.6rem;
+}
+
+.list-detail-memo {
+  margin: 0 0 24px;
+  color: #40584d;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.list-detail-items {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 8px;
+  list-style: none;
+}
+
+.list-detail-item {
+  display: flex;
+  min-height: 48px;
+  padding: 6px 10px;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #e1e8e4;
+}
+
+.list-detail-item form:not(.button_to) {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+}
+
+.list-detail-item input[type="text"] {
+  min-width: 0;
+  flex: 1;
+  padding: 8px 4px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+
+.list-detail-item input[type="text"]:focus {
+  border-color: #aabbb2;
+  outline: 2px solid #d6dfda;
+}
+
+.list-empty-state {
+  padding: 64px 24px;
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+.list-create-link {
+  color: #18332d;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .template-picker-open {
   min-height: 40px;
   margin-bottom: 20px;
@@ -216,5 +414,33 @@
   .template-picker-list,
   .template-picker-detail {
     padding: 18px;
+  }
+
+  .lists-page {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .list-sidebar {
+    max-height: 34dvh;
+    padding: 16px;
+    border-right: 0;
+    border-bottom: 1px solid #d6dfda;
+  }
+
+  .list-sidebar-header {
+    margin-bottom: 12px;
+  }
+
+  .list-picker-list {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+
+  .list-detail-pane {
+    padding: 24px 16px;
+  }
+
+  .list-detail-header {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
