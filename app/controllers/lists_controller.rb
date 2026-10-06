@@ -1,6 +1,10 @@
 class ListsController < ApplicationController
   def index
-    @lists = current_user.lists.includes(:items)
+    @lists = current_user.lists
+      .left_joins(:items)
+      .includes(:items)
+      .group("lists.id")
+      .order(Arel.sql("MAX(items.updated_at) DESC"))
     @selected_list_id = @lists.find_by(id: params[:selected_list_id])&.id || @lists.first&.id
     @list = current_user.lists.build
     @list.items.build

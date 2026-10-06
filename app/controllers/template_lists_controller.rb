@@ -1,6 +1,11 @@
 class TemplateListsController < ApplicationController
   def index
-    @template_lists = current_user.template_lists.includes(:template_items)
+    # @template_lists = current_user.template_lists.includes(:template_items)
+    @template_lists = current_user.template_lists
+      .left_joins(:template_items)
+      .includes(:template_items)
+      .group("template_lists.id")
+      .order(Arel.sql("MAX(template_items.updated_at) DESC"))
     @selected_template_list_id = @template_lists.find_by(id: params[:selected_template_list_id])&.id || @template_lists.first&.id
     @template_list = current_user.template_lists.build
     @template_list.template_items.build
