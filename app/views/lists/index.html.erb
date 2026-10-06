@@ -8,6 +8,21 @@
               <h4 class="list-title">
                 <%= list.title %>
               </h4>
+              <%= form_with model: list, class: "list-completion-form", data: {
+                    controller: "list-completion",
+                    action: "turbo:submit-end->list-completion#submitted"
+                  } do |completion_form| %>
+                <label for="list-completed-<%= list.id %>">
+                  <%= completion_form.check_box :is_completed,
+                        id: "list-completed-#{list.id}",
+                        data: {
+                          list_completion_target: "checkbox",
+                          action: "change->list-completion#save"
+                        }
+                  %>
+                  <span data-list-completion-target="status"><%= list.is_completed? ? "完了" : "アクティブ" %></span>
+                </label>
+              <% end %>
               <% if current_user.own?(list) %>
                 <%= link_to '削除', list_path(list),
                       id: "button-delete-#{list.id}",

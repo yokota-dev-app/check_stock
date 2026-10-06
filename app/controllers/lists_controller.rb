@@ -20,6 +20,16 @@ class ListsController < ApplicationController
     end
   end
 
+  def update
+    list = current_user.lists.find(params[:id])
+
+    if list.update(completion_params)
+      head :no_content
+    else
+      head :unprocessable_entity
+    end
+  end
+
   def make_template
     list = current_user.lists.includes(:items).find(params[:id])
     template_list = current_user.template_lists.build(
@@ -49,7 +59,11 @@ class ListsController < ApplicationController
   private
 
   def list_params
-    params.require(:list).permit(:title, :memo, items_attributes: [:name])
+    params.require(:list).permit(:title, :memo, :is_completed, items_attributes: [:name])
+  end
+
+  def completion_params
+    params.require(:list).permit(:is_completed)
   end
 
   def load_template_lists

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root "static_pages#top"
 
   resources :users, only: %i[new create]
-  resources :lists, only: %i[index new create destroy] do
+  resources :lists, only: %i[index new create update destroy] do
     member do
       post :make_template
     end
