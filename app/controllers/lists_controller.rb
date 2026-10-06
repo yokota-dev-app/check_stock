@@ -1,11 +1,13 @@
 class ListsController < ApplicationController
   def index
     @lists = current_user.lists
-      .left_joins(:items)
       .includes(:items)
-      .group("lists.id")
-      .order(Arel.sql("MAX(items.updated_at) DESC"))
-    @selected_list_id = @lists.find_by(id: params[:selected_list_id])&.id || @lists.first&.id
+      .order(items_updated_at: :desc)
+
+    @selected_list_id =
+      @lists.find_by(id: params[:selected_list_id])&.id ||
+      @lists.first&.id
+
     @list = current_user.lists.build
     @list.items.build
     load_template_lists
