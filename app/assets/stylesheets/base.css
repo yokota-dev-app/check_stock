@@ -215,7 +215,7 @@ button[type="submit"]:active {
   min-height: 0;
   flex: 1 0 auto;
   margin: 0 auto;
-  grid-template-columns: minmax(260px, 0.36fr) minmax(0, 0.64fr);
+  grid-template-columns: minmax(260px, 0.26fr) minmax(0, 0.74fr);
   color: var(--ink);
   background: var(--surface);
 }
@@ -260,11 +260,13 @@ button[type="submit"]:active {
 }
 
 .list-picker-row {
-  display: grid;
-  padding: 5px;
-  grid-template-columns: minmax(0, 1fr) auto;
+  display: flex;
   align-items: center;
-  gap: 4px 8px;
+  gap: 8px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
   border: 1px solid transparent;
   border-radius: 8px;
   background: transparent;
@@ -279,12 +281,11 @@ button[type="submit"]:active {
 
 .list-picker-option {
   display: flex;
-  min-width: 0;
-  padding: 10px 9px;
-  grid-column: 1 / -1;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  flex: 1 1 0%;    /* 残りの隙間だけを占有 */
+  width: 0;        /* 重要：要素自身の固有幅（テキスト長）を強制リセット */
+  min-width: 0;    /* 重要：中身のテキストによる膨らみを防止 */
+  padding: 10px 9px;
   border: 0;
   background: transparent;
   border-radius: 6px;
@@ -292,6 +293,7 @@ button[type="submit"]:active {
   font: inherit;
   text-align: left;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .list-picker-option[aria-pressed="true"] .list-picker-title {
@@ -303,10 +305,12 @@ button[type="submit"]:active {
 }
 
 .list-picker-title {
-    font-weight: 550;
+  display: block;
+  font-weight: 550;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  width: 100%;
 }
 
 .list-picker-state,
@@ -315,8 +319,15 @@ button[type="submit"]:active {
   font-size: 0.85rem;
 }
 
+.list-delete-button-form,
+form:has(.list-delete-button),
+.button_to {
+  flex-shrink: 0;
+}
+
 .list-completion-form {
   margin: 0;
+  flex-shrink: 0;
 }
 
 .list-completion-label {
@@ -344,6 +355,7 @@ button[type="submit"]:active {
 
 .list-delete-button,
 .list-template-button {
+  margin: 0;
   min-height: 36px;
   padding: 0 10px;
   border: 1px solid var(--line-strong);
@@ -352,6 +364,8 @@ button[type="submit"]:active {
   color: var(--ink);
   font: inherit;
   cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 button.list-delete-button,
@@ -697,7 +711,12 @@ button.item-delete-button:hover {
 .template-picker-content {
   display: grid;
   min-height: 360px;
-  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+  /* 左側の比率を下げ、右側も適度な比率に設定 */
+  grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
+
+  /* コンテナ全体の横幅を抑えて中央寄せる設定（追加） */
+  max-width: 800px; /* お好みの幅（例: 700px 〜 850px）に調整してください */
+  width: 100%;
 }
 
 .template-picker-list,
@@ -808,7 +827,15 @@ button.item-delete-button:hover {
   }
 
   .list-picker-list {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    list-style: none;
   }
 
   .list-detail-pane {

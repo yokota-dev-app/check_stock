@@ -19,14 +19,7 @@
       <ul class="list-picker-list">
         <% @lists.each_with_index do |list, index| %>
           <li class="list-picker-row">
-            <button type="button"
-                    class="list-picker-option"
-                    data-list-selector-target="option"
-                    data-list-id="<%= list.id %>"
-                    data-action="list-selector#select"
-                    aria-pressed="<%= list.id == @selected_list_id %>">
-              <span class="list-picker-title"><%= list.title %></span>
-            </button>
+            <!-- 1. チェック欄 (form) -->
             <%= form_with model: list, class: "list-completion-form", data: {
                   controller: "list-completion",
                   action: "turbo:submit-end->list-completion#submitted"
@@ -39,13 +32,27 @@
                         action: "change->list-completion#save"
                       }
                 %>
-                        <span><%= list.is_completed? ? "完了" : "アクティブ" %></span>
               </label>
             <% end %>
+
+            <!-- 2. タイトル (button) -->
+            <button type="button"
+                    class="list-picker-option"
+                    data-list-selector-target="option"
+                    data-list-id="<%= list.id %>"
+                    data-action="list-selector#select"
+                    aria-pressed="<%= list.id == @selected_list_id %>">
+              <span class="list-picker-title"><%= list.title %></span>
+            </button>
+
+            <!-- 3. 削除ボタン -->
             <%= button_to "削除", list_path(list),
                   method: :delete,
                   class: "list-delete-button",
-                  form: { data: { turbo_confirm: "削除してもよろしいでしょうか？" } }
+                  form: { 
+                    class: "list-delete-button-form", 
+                    data: { turbo_confirm: "削除してもよろしいでしょうか？" } 
+                  }
             %>
           </li>
         <% end %>
@@ -74,7 +81,7 @@
               <div class="list-detail-edit-field">
                 <%= list_form.label :memo, "メモ" %>
                 <%= list_form.text_area :memo,
-                      rows: 3,
+                      rows: 1,
                       class: "list-detail-memo-input",
                       data: { detail_autosave_target: "memo" }
                 %>

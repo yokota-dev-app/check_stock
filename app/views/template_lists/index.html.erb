@@ -42,7 +42,7 @@
         <article class="list-detail" data-list-selector-target="panel" data-list-id="<%= template_list.id %>" <% unless template_list.id == @selected_template_list_id %>hidden<% end %>>
           <header class="list-detail-header">
             <div class="list-detail-edit">
-              <p class="list-detail-eyebrow">テンプレート詳細</p>
+              <%# <p class="list-detail-eyebrow">テンプレート詳細</p> %>
               <%= form_with model: template_list, class: "list-detail-edit-form", data: {
                     controller: "detail-autosave",
                     action: "focusout->detail-autosave#focusout turbo:submit-end->detail-autosave#submitted"
@@ -61,7 +61,7 @@
                 <div class="list-detail-edit-field">
                   <%= template_list_form.label :memo, "メモ" %>
                   <%= template_list_form.text_area :memo,
-                        rows: 3,
+                        rows: 1,
                         class: "list-detail-memo-input",
                         data: { detail_autosave_target: "memo" }
                   %>
