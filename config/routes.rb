@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :items, only: %i[create update destroy]
   end
 
-  resources :template_lists, only: %i[index new create destroy] do
+  resources :template_lists, only: %i[index new create update destroy] do
     resources :template_items, only: %i[create update destroy]
   end
 

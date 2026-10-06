@@ -1,6 +1,7 @@
 class ListsController < ApplicationController
   def index
     @lists = current_user.lists.includes(:items)
+    @selected_list_id = @lists.find_by(id: params[:selected_list_id])&.id || @lists.first&.id
     @list = current_user.lists.build
     @list.items.build
     load_template_lists
@@ -26,7 +27,7 @@ class ListsController < ApplicationController
   def update
     list = current_user.lists.find(params[:id])
 
-    if list.update(completion_params)
+    if list.update(update_params)
       head :no_content
     else
       head :unprocessable_entity
@@ -67,6 +68,10 @@ class ListsController < ApplicationController
 
   def completion_params
     params.require(:list).permit(:is_completed)
+  end
+
+  def update_params
+    params.require(:list).permit(:title, :memo, :is_completed)
   end
 
   def load_template_lists

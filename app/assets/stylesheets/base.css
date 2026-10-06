@@ -232,6 +232,52 @@
   font-size: 1.6rem;
 }
 
+.list-detail-edit-form {
+  display: grid;
+  width: min(100%, 620px);
+  flex: 1;
+  gap: 14px;
+}
+
+.list-detail-edit-field {
+  display: grid;
+  gap: 6px;
+}
+
+.list-detail-title-input,
+.list-detail-memo-input {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #c8d4cd;
+  border-radius: 4px;
+  background: #fff;
+  color: #18332d;
+  font: inherit;
+}
+
+.list-detail-title-input {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.list-detail-memo-input {
+  min-height: 88px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.list-detail-save-button {
+  justify-self: start;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid #18332d;
+  border-radius: 4px;
+  background: #18332d;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
 .list-detail-memo {
   margin: 0 0 24px;
   color: #40584d;

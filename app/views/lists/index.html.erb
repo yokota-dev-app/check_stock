@@ -24,7 +24,7 @@
                     data-list-selector-target="option"
                     data-list-id="<%= list.id %>"
                     data-action="list-selector#select"
-                    aria-pressed="<%= index.zero? %>">
+                    aria-pressed="<%= list.id == @selected_list_id %>">
               <span class="list-picker-title"><%= list.title %></span>
             </button>
             <%= form_with model: list, class: "list-completion-form", data: {
@@ -53,20 +53,39 @@
 
     <section class="list-detail-pane" aria-label="選択中のリスト" data-list-selector-target="panels">
       <% @lists.each_with_index do |list, index| %>
-        <article class="list-detail" data-list-selector-target="panel" data-list-id="<%= list.id %>" <% unless index.zero? %>hidden<% end %>>
+        <article class="list-detail" data-list-selector-target="panel" data-list-id="<%= list.id %>" <% unless list.id == @selected_list_id %>hidden<% end %>>
           <header class="list-detail-header">
-            <div>
-              <h2><%= list.title %></h2>
-            </div>
+            <%= form_with model: list, class: "list-detail-edit-form", data: {
+                  controller: "detail-autosave",
+                  action: "focusout->detail-autosave#focusout turbo:submit-end->detail-autosave#submitted"
+                } do |list_form| %>
+              <div class="list-detail-edit-field">
+                <%= list_form.label :title, "タイトル" %>
+                <%= list_form.text_field :title,
+                      required: true,
+                      class: "list-detail-title-input",
+                      data: {
+                        detail_autosave_target: "title",
+                        action: "keydown.enter->detail-autosave#save"
+                      }
+                %>
+              </div>
+              <div class="list-detail-edit-field">
+                <%= list_form.label :memo, "メモ" %>
+                <%= list_form.text_area :memo,
+                      rows: 3,
+                      class: "list-detail-memo-input",
+                      data: { detail_autosave_target: "memo" }
+                %>
+              </div>
+            <% end %>
             <%= button_to "テンプレート化", make_template_list_path(list),
                   method: :post,
                   class: "list-template-button",
                   form: { data: { turbo_confirm: "テンプレート化してもよろしいでしょうか？" } }
             %>
           </header>
-          <% if list.memo.present? %>
-            <p class="list-detail-memo"><%= list.memo %></p>
-          <% end %>
+
           <%= form_with url: list_items_path(list), scope: :item, class: "item-add-form" do |item_form| %>
             <%= item_form.text_field :name,
                   value: @new_item_list_id == list.id ? @new_item_name : nil,

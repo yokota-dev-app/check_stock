@@ -24,7 +24,7 @@
                     data-list-selector-target="option"
                     data-list-id="<%= template_list.id %>"
                     data-action="list-selector#select"
-                    aria-pressed="<%= index.zero? %>">
+                    aria-pressed="<%= template_list.id == @selected_template_list_id %>">
               <span class="list-picker-title"><%= template_list.title %></span>
             </button>
             <%= button_to "削除", template_list_path(template_list),
@@ -39,16 +39,36 @@
 
     <section class="list-detail-pane" aria-label="選択中のテンプレート">
       <% @template_lists.each_with_index do |template_list, index| %>
-        <article class="list-detail" data-list-selector-target="panel" data-list-id="<%= template_list.id %>" <% unless index.zero? %>hidden<% end %>>
+        <article class="list-detail" data-list-selector-target="panel" data-list-id="<%= template_list.id %>" <% unless template_list.id == @selected_template_list_id %>hidden<% end %>>
           <header class="list-detail-header">
-            <div>
+            <div class="list-detail-edit">
               <p class="list-detail-eyebrow">テンプレート詳細</p>
-              <h2><%= template_list.title %></h2>
+              <%= form_with model: template_list, class: "list-detail-edit-form", data: {
+                    controller: "detail-autosave",
+                    action: "focusout->detail-autosave#focusout turbo:submit-end->detail-autosave#submitted"
+                  } do |template_list_form| %>
+                <div class="list-detail-edit-field">
+                  <%= template_list_form.label :title, "タイトル" %>
+                  <%= template_list_form.text_field :title,
+                        required: true,
+                        class: "list-detail-title-input",
+                        data: {
+                          detail_autosave_target: "title",
+                          action: "keydown.enter->detail-autosave#save"
+                        }
+                  %>
+                </div>
+                <div class="list-detail-edit-field">
+                  <%= template_list_form.label :memo, "メモ" %>
+                  <%= template_list_form.text_area :memo,
+                        rows: 3,
+                        class: "list-detail-memo-input",
+                        data: { detail_autosave_target: "memo" }
+                  %>
+                </div>
+              <% end %>
             </div>
           </header>
-          <% if template_list.memo.present? %>
-            <p class="list-detail-memo"><%= template_list.memo %></p>
-          <% end %>
           <%= form_with url: template_list_template_items_path(template_list), scope: :template_item, class: "item-add-form" do |template_item_form| %>
             <%= template_item_form.text_field :name,
                   value: @new_template_item_template_list_id == template_list.id ? @new_template_item_name : nil,
