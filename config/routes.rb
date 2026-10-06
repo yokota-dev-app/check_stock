@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[new create]
   resources :lists, only: %i[index new create destroy] do
+    member do
+      post :make_template
+    end
+
     resources :items, only: %i[create update destroy]
   end
 

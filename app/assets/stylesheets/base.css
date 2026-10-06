@@ -93,6 +93,106 @@
   color: #a32222;
 }
 
+.template-picker-open {
+  min-height: 40px;
+  margin-bottom: 20px;
+  padding: 0 16px;
+  border: 1px solid #18332d;
+  border-radius: 4px;
+  background: #fff;
+  color: #18332d;
+  font: inherit;
+  cursor: pointer;
+}
+
+.template-picker-dialog {
+  width: min(860px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  overflow: auto;
+  border: 1px solid #c8d4cd;
+  border-radius: 8px;
+  color: #18332d;
+}
+
+.template-picker-dialog::backdrop {
+  background: rgb(14 31 26 / 48%);
+}
+
+.template-picker-content {
+  display: grid;
+  min-height: 360px;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+}
+
+.template-picker-list,
+.template-picker-detail {
+  padding: 24px;
+}
+
+.template-picker-list {
+  border-right: 1px solid #d6dfda;
+}
+
+.template-picker-list h2,
+.template-picker-detail h2 {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+}
+
+.template-picker-option {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 12px;
+  border: 0;
+  border-bottom: 1px solid #e1e8e4;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.template-picker-option[aria-pressed="true"] {
+  background: #e2e9e6;
+  font-weight: 700;
+}
+
+.template-picker-detail p {
+  white-space: pre-wrap;
+}
+
+.template-picker-actions {
+  display: flex;
+  padding: 16px 24px;
+  justify-content: flex-end;
+  gap: 8px;
+  border-top: 1px solid #d6dfda;
+}
+
+.template-picker-actions button {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid #18332d;
+  border-radius: 4px;
+  background: #fff;
+  color: #18332d;
+  font: inherit;
+  cursor: pointer;
+}
+
+.template-picker-actions button[data-template-picker-target="apply"] {
+  background: #18332d;
+  color: #fff;
+}
+
+.template-picker-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .guide-area .guide-button {
     transition: none;
@@ -102,5 +202,19 @@
 @media (max-width: 600px) {
   .guide-area h1 {
     font-size: 2rem;
+  }
+
+  .template-picker-content {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .template-picker-list {
+    border-right: 0;
+    border-bottom: 1px solid #d6dfda;
+  }
+
+  .template-picker-list,
+  .template-picker-detail {
+    padding: 18px;
   }
 }
