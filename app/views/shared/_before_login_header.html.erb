@@ -3,10 +3,9 @@
     <%= link_to root_path, class: "site-brand" do %>
       PackReady
     <% end %>
-    <%# <a class="site-brand" href="/">PackReady</a> %>
-    <ul class="guide-area">
+    <nav class="site-nav-login" aria-label="アカウント">
       <%= link_to 'ログイン', login_path, class: "guide-button" %>
       <%= link_to '新規登録', new_user_path, class: "guide-button" %>
-    </ul>
+    </nav>
   </nav>
 </header>

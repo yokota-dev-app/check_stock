@@ -39,6 +39,7 @@
                         action: "change->list-completion#save"
                       }
                 %>
+                        <span><%= list.is_completed? ? "完了" : "アクティブ" %></span>
               </label>
             <% end %>
             <%= button_to "削除", list_path(list),
