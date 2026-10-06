@@ -1,0 +1,28 @@
+<%= form_with model: @template_list, class: "new_template_list", data: { controller: "nested-template-items" } do |f| %>
+  <div class="mb-3">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :memo %>
+    <%= f.text_area :memo, class: "form-control", rows: "10" %>
+  </div>
+  <div data-nested-template-items-target="fields">
+    <%= f.fields_for :template_items do |template_item_fields| %>
+      <div class="mb-3" data-template-item-field>
+        <%= template_item_fields.label :name, "チェック項目" %>
+        <%= template_item_fields.text_field :name, class: "form-control" %>
+      </div>
+    <% end %>
+  </div>
+  <template data-nested-template-items-target="template">
+    <%= f.fields_for :template_items, TemplateItem.new, child_index: "NEW_RECORD" do |template_item_fields| %>
+      <div class="mb-3" data-template-item-field>
+        <%= template_item_fields.label :name, "チェック項目" %>
+        <%= template_item_fields.text_field :name, class: "form-control" %>
+      </div>
+    <% end %>
+  </template>
+  <button type="button" data-action="nested-template-items#add">項目を追加</button>
+  <%= f.submit nil, class: "btn btn-primary" %>
+<% end %>

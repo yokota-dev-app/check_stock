@@ -1,0 +1,71 @@
+<%= form_with model: @list, class: "new_list", data: {
+      controller: "nested-items",
+      action: "template-picker:apply->nested-items#applyTemplate"
+    } do |f| %>
+  <div class="template-picker" data-controller="template-picker">
+    <button type="button" class="template-picker-open" data-action="template-picker#open">
+      テンプレートから作成
+    </button>
+    <dialog class="template-picker-dialog" data-template-picker-target="dialog">
+      <div class="template-picker-content">
+        <aside class="template-picker-list" aria-label="テンプレート一覧">
+          <h2>テンプレート</h2>
+          <% if @template_lists.present? %>
+            <% @template_lists.each do |template_list| %>
+              <%= button_tag template_list.title,
+                    type: "button",
+                    class: "template-picker-option",
+                    aria: { pressed: false },
+                    data: {
+                      action: "template-picker#select",
+                      template_picker_title_param: template_list.title,
+                      template_picker_memo_param: template_list.memo.to_s,
+                      template_picker_items_param: template_list.template_items.map(&:name).to_json
+                    }
+              %>
+            <% end %>
+          <% else %>
+            <p>登録済みのテンプレートはありません。</p>
+          <% end %>
+        </aside>
+        <section class="template-picker-detail" aria-live="polite">
+          <h2 data-template-picker-target="title">テンプレートを選択してください</h2>
+          <p data-template-picker-target="memo"></p>
+          <ul data-template-picker-target="items"></ul>
+        </section>
+      </div>
+      <div class="template-picker-actions">
+        <button type="button" data-action="template-picker#close">キャンセル</button>
+        <button type="button" data-template-picker-target="apply" data-action="template-picker#apply" disabled>
+          決定
+        </button>
+      </div>
+    </dialog>
+  </div>
+  <div class="mb-3">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control", data: { nested_items_target: "title" } %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :memo %>
+    <%= f.text_area :memo, class: "form-control", rows: "10", data: { nested_items_target: "memo" } %>
+  </div>
+  <div data-nested-items-target="fields">
+    <%= f.fields_for :items do |item_fields| %>
+      <div class="mb-3" data-item-field>
+        <%= item_fields.label :name, "チェック項目" %>
+        <%= item_fields.text_field :name, class: "form-control" %>
+      </div>
+    <% end %>
+  </div>
+  <template data-nested-items-target="template">
+    <%= f.fields_for :items, Item.new, child_index: "NEW_RECORD" do |item_fields| %>
+      <div class="mb-3" data-item-field>
+        <%= item_fields.label :name, "チェック項目" %>
+        <%= item_fields.text_field :name, class: "form-control" %>
+      </div>
+    <% end %>
+  </template>
+  <button type="button" data-action="nested-items#add">項目を追加</button>
+  <%= f.submit nil, class: "btn btn-primary" %>
+<% end %>

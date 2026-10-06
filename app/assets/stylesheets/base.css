@@ -291,6 +291,65 @@
   text-underline-offset: 3px;
 }
 
+.dialog-open-button,
+.dialog-close-button {
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid #aabbb2;
+  border-radius: 4px;
+  background: #fff;
+  color: #18332d;
+  font: inherit;
+  cursor: pointer;
+}
+
+.create-dialog {
+  width: min(720px, calc(100vw - 32px));
+  max-width: none;
+  max-height: min(88dvh, 860px);
+  padding: 0;
+  overflow: auto;
+  border: 1px solid #c8d4cd;
+  border-radius: 8px;
+  color: #18332d;
+}
+
+.create-dialog::backdrop {
+  background: rgb(14 31 26 / 48%);
+}
+
+.create-dialog-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  min-height: 64px;
+  padding: 12px 20px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid #d6dfda;
+  background: #fff;
+}
+
+.create-dialog-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.create-dialog-body {
+  padding: 20px;
+}
+
+.create-dialog-body .container,
+.create-dialog-body .row,
+.create-dialog-body [class*="col-"] {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
 .template-picker-open {
   min-height: 40px;
   margin-bottom: 20px;
@@ -442,5 +501,15 @@
   .list-detail-header {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .create-dialog {
+    width: calc(100vw - 20px);
+    max-height: calc(100dvh - 20px);
+  }
+
+  .create-dialog-header,
+  .create-dialog-body {
+    padding: 16px;
   }
 }

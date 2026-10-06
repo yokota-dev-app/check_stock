@@ -3,7 +3,18 @@
     <aside class="list-sidebar" aria-label="テンプレート一覧">
       <div class="list-sidebar-header">
         <h1>テンプレート</h1>
-        <%= link_to "新規作成", new_template_list_path, class: "list-create-link" %>
+        <div data-controller="dialog">
+          <button type="button" class="dialog-open-button" data-action="dialog#open">新規作成</button>
+          <dialog class="create-dialog" data-dialog-target="dialog" aria-labelledby="new-template-list-dialog-title">
+            <header class="create-dialog-header">
+              <h2 id="new-template-list-dialog-title">新しいテンプレート</h2>
+              <button type="button" class="dialog-close-button" data-action="dialog#close" aria-label="閉じる">閉じる</button>
+            </header>
+            <div class="create-dialog-body">
+              <%= render "template_lists/form" %>
+            </div>
+          </dialog>
+        </div>
       </div>
       <ul class="list-picker-list">
         <% @template_lists.each_with_index do |template_list, index| %>
@@ -85,7 +96,18 @@
     <section class="list-empty-state">
       <h1>テンプレート</h1>
       <p>登録済みのテンプレートはありません</p>
-      <%= link_to "新規作成", new_template_list_path, class: "list-create-link" %>
+      <div data-controller="dialog">
+        <button type="button" class="dialog-open-button" data-action="dialog#open">新規作成</button>
+        <dialog class="create-dialog" data-dialog-target="dialog" aria-labelledby="new-template-list-dialog-title">
+          <header class="create-dialog-header">
+            <h2 id="new-template-list-dialog-title">新しいテンプレート</h2>
+            <button type="button" class="dialog-close-button" data-action="dialog#close" aria-label="閉じる">閉じる</button>
+          </header>
+          <div class="create-dialog-body">
+            <%= render "template_lists/form" %>
+          </div>
+        </dialog>
+      </div>
     </section>
   <% end %>
 </main>

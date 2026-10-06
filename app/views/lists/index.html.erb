@@ -3,7 +3,18 @@
     <aside class="list-sidebar" aria-label="持ち物リスト一覧">
       <div class="list-sidebar-header">
         <h1>持ち物リスト</h1>
-        <%= link_to "新規作成", new_list_path, class: "list-create-link" %>
+        <div data-controller="dialog">
+          <button type="button" class="dialog-open-button" data-action="dialog#open">新規作成</button>
+          <dialog class="create-dialog" data-dialog-target="dialog" aria-labelledby="new-list-dialog-title">
+            <header class="create-dialog-header">
+              <h2 id="new-list-dialog-title">新しい持ち物リスト</h2>
+              <button type="button" class="dialog-close-button" data-action="dialog#close" aria-label="閉じる">閉じる</button>
+            </header>
+            <div class="create-dialog-body">
+              <%= render "lists/form" %>
+            </div>
+          </dialog>
+        </div>
       </div>
       <ul class="list-picker-list">
         <% @lists.each_with_index do |list, index| %>
@@ -103,7 +114,18 @@
     <section class="list-empty-state">
       <h1>持ち物リスト</h1>
       <p>持ち物リストがありません</p>
-      <%= link_to "新規作成", new_list_path, class: "list-create-link" %>
+      <div data-controller="dialog">
+        <button type="button" class="dialog-open-button" data-action="dialog#open">新規作成</button>
+        <dialog class="create-dialog" data-dialog-target="dialog" aria-labelledby="new-list-dialog-title">
+          <header class="create-dialog-header">
+            <h2 id="new-list-dialog-title">新しい持ち物リスト</h2>
+            <button type="button" class="dialog-close-button" data-action="dialog#close" aria-label="閉じる">閉じる</button>
+          </header>
+          <div class="create-dialog-body">
+            <%= render "lists/form" %>
+          </div>
+        </dialog>
+      </div>
     </section>
   <% end %>
 </main>
