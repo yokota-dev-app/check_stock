@@ -616,6 +616,13 @@ button.item-delete-button:hover {
 
 .create-dialog-body {
   padding: 20px;
+  text-align: left;
+}
+
+.create-dialog-body form,
+.new_list,
+.new_template_list {
+  width: 100%;
 }
 
 .create-dialog-body h1 {
@@ -716,12 +723,10 @@ button.item-delete-button:hover {
 .template-picker-content {
   display: grid;
   min-height: 360px;
-  /* 左側の比率を下げ、右側も適度な比率に設定 */
   grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
-
-  /* コンテナ全体の横幅を抑えて中央寄せる設定（追加） */
-  max-width: 800px; /* お好みの幅（例: 700px 〜 850px）に調整してください */
   width: 100%;
+  max-width: none;
+  margin: 0;
 }
 
 .template-picker-list,
