@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_06_132658) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_06_133156) do
   create_table "items", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.boolean "is_checked", default: false, null: false
@@ -48,6 +48,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_06_132658) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "items_updated_at"
     t.index ["user_id"], name: "index_template_lists_on_user_id"
   end
 
