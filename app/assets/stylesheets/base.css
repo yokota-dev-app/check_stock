@@ -413,10 +413,15 @@ button.item-delete-button:hover {
   font-size: 1.6rem;
 }
 
+.list-detail-edit {
+  width: 100%;
+}
+
 .list-detail-edit-form {
   display: grid;
-  width: min(100%, 620px);
-  flex: 1;
+  width: 100%;
+  max-width: 100%;
+  flex: 1 1 auto;
   gap: 12px;
 }
 
