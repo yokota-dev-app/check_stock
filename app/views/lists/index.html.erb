@@ -15,7 +15,6 @@
                     data-action="list-selector#select"
                     aria-pressed="<%= index.zero? %>">
               <span class="list-picker-title"><%= list.title %></span>
-              <span class="list-picker-state"><%= list.is_completed? ? "完了" : "アクティブ" %></span>
             </button>
             <%= form_with model: list, class: "list-completion-form", data: {
                   controller: "list-completion",
@@ -29,7 +28,6 @@
                         action: "change->list-completion#save"
                       }
                 %>
-                <span data-list-completion-target="status"><%= list.is_completed? ? "完了" : "アクティブ" %></span>
               </label>
             <% end %>
             <%= button_to "削除", list_path(list),
@@ -47,7 +45,6 @@
         <article class="list-detail" data-list-selector-target="panel" data-list-id="<%= list.id %>" <% unless index.zero? %>hidden<% end %>>
           <header class="list-detail-header">
             <div>
-              <p class="list-detail-eyebrow"><%= list.is_completed? ? "完了" : "アクティブ" %></p>
               <h2><%= list.title %></h2>
             </div>
             <%= button_to "テンプレート化", make_template_list_path(list),

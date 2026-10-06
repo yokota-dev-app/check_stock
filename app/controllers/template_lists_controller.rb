@@ -1,6 +1,6 @@
 class TemplateListsController < ApplicationController
   def index
-    @template_lists = current_user.template_lists
+    @template_lists = current_user.template_lists.includes(:template_items)
   end
 
   def new

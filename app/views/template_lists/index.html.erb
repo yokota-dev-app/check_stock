@@ -1,69 +1,91 @@
-<div>
+<main class="lists-page" data-controller="list-selector">
   <% if @template_lists.present? %>
-    <% @template_lists.each do |template_list| %>
-      <div class="temp">
-        <div id="template_list-id-<%= template_list.id %>">
-          <div class="template_list">
-            <div class="template_list-body">
-              <h4 class="template_list-title">
-                <%= template_list.title %>
-              </h4>
-              <% if current_user.own?(template_list) %>
-                <%= link_to '削除', template_list_path(template_list),
-                      id: "button-delete-#{template_list.id}",
-                      data: {
-                        turbo_method: :delete,
-                        turbo_confirm: "削除してもよろしいでしょうか？"
-                      }
-                %>
-              <% end %>
-              <p class="template_listd-memo"><%= template_list.memo %></p>
-              <%= form_with url: template_list_template_items_path(template_list), scope: :template_item, class: "template_item-add-form" do |template_item_form| %>
-                <%= template_item_form.text_field :name,
-                      value: @new_template_item_template_list_id == template_list.id ? @new_template_item_name : nil,
-                      placeholder: "追加する項目",
-                      aria: { label: "追加する項目" }
-                %>
-                <%= template_item_form.submit "追加" %>
-              <% end %>
-              <% if @new_template_item_template_list_id == template_list.id && @new_template_item_errors.present? %>
-                <p class="template_item-add-errors"><%= @new_template_item_errors.to_sentence %></p>
-              <% end %>
-              <ul>
-                <% template_list.template_items.each do |template_item| %>
-                  <li>
-                    <%= form_with model: [template_list, template_item], data: {
-                          controller: "template_item-autosave",
-                          action: "focusout->template_item-autosave#focusout keydown.enter->template_item-autosave#save turbo:submit-end->template_item-autosave#submitted"
-                        } do |template_item_form| %>
-                      <%= template_item_form.check_box :is_checked,
-                            id: "template_item-checked-#{template_item.id}",
-                            data: {
-                              template_item_autosave_target: "checked",
-                              action: "change->template_item-autosave#save"
-                            }
-                      %>
-                      <%= template_item_form.text_field :name,
-                            required: true,
-                            aria: { label: "チェック項目名" },
-                            data: { template_item_autosave_target: "field" }
-                      %>
-                    <% end %>
-                    <%= button_to "削除", template_list_template_item_path(template_list, template_item),
-                          method: :delete,
-                          id: "button-delete-template_item-#{template_item.id}",
-                          class: "template_item-delete-button",
-                          form: { data: { turbo_confirm: "この項目を削除しますか？" } }
-                    %>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-        </div>
+    <aside class="list-sidebar" aria-label="テンプレート一覧">
+      <div class="list-sidebar-header">
+        <h1>テンプレート</h1>
+        <%= link_to "新規作成", new_template_list_path, class: "list-create-link" %>
       </div>
-    <% end %>
+      <ul class="list-picker-list">
+        <% @template_lists.each_with_index do |template_list, index| %>
+          <li class="list-picker-row">
+            <button type="button"
+                    class="list-picker-option"
+                    data-list-selector-target="option"
+                    data-list-id="<%= template_list.id %>"
+                    data-action="list-selector#select"
+                    aria-pressed="<%= index.zero? %>">
+              <span class="list-picker-title"><%= template_list.title %></span>
+            </button>
+            <%= button_to "削除", template_list_path(template_list),
+                  method: :delete,
+                  class: "list-delete-button",
+                  form: { data: { turbo_confirm: "削除してもよろしいでしょうか？" } }
+            %>
+          </li>
+        <% end %>
+      </ul>
+    </aside>
+
+    <section class="list-detail-pane" aria-label="選択中のテンプレート">
+      <% @template_lists.each_with_index do |template_list, index| %>
+        <article class="list-detail" data-list-selector-target="panel" data-list-id="<%= template_list.id %>" <% unless index.zero? %>hidden<% end %>>
+          <header class="list-detail-header">
+            <div>
+              <p class="list-detail-eyebrow">テンプレート詳細</p>
+              <h2><%= template_list.title %></h2>
+            </div>
+          </header>
+          <% if template_list.memo.present? %>
+            <p class="list-detail-memo"><%= template_list.memo %></p>
+          <% end %>
+          <%= form_with url: template_list_template_items_path(template_list), scope: :template_item, class: "item-add-form" do |template_item_form| %>
+            <%= template_item_form.text_field :name,
+                  value: @new_template_item_template_list_id == template_list.id ? @new_template_item_name : nil,
+                  placeholder: "追加する項目",
+                  aria: { label: "追加する項目" }
+            %>
+            <%= template_item_form.submit "追加" %>
+          <% end %>
+          <% if @new_template_item_template_list_id == template_list.id && @new_template_item_errors.present? %>
+            <p class="item-add-errors"><%= @new_template_item_errors.to_sentence %></p>
+          <% end %>
+          <ul class="list-detail-items">
+            <% template_list.template_items.each do |template_item| %>
+              <li class="list-detail-item">
+                <%= form_with model: [template_list, template_item], data: {
+                      controller: "template_item-autosave",
+                      action: "focusout->template_item-autosave#focusout keydown.enter->template_item-autosave#save turbo:submit-end->template_item-autosave#submitted"
+                    } do |template_item_form| %>
+                  <%= template_item_form.check_box :is_checked,
+                        id: "template_item-checked-#{template_item.id}",
+                        data: {
+                          template_item_autosave_target: "checked",
+                          action: "change->template_item-autosave#save"
+                        }
+                  %>
+                  <%= template_item_form.text_field :name,
+                        required: true,
+                        aria: { label: "チェック項目名" },
+                        data: { template_item_autosave_target: "field" }
+                  %>
+                <% end %>
+                <%= button_to "削除", template_list_template_item_path(template_list, template_item),
+                      method: :delete,
+                      id: "button-delete-template_item-#{template_item.id}",
+                      class: "item-delete-button",
+                      form: { data: { turbo_confirm: "この項目を削除しますか？" } }
+                %>
+              </li>
+            <% end %>
+          </ul>
+        </article>
+      <% end %>
+    </section>
   <% else %>
-    <div>持ち物リストがありません</div>
+    <section class="list-empty-state">
+      <h1>テンプレート</h1>
+      <p>登録済みのテンプレートはありません</p>
+      <%= link_to "新規作成", new_template_list_path, class: "list-create-link" %>
+    </section>
   <% end %>
-</div>
+</main>

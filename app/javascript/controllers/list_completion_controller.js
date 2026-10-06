@@ -8,7 +8,7 @@ export default class extends Controller {
   }
 
   save() {
-    this.statusTarget.textContent = this.checkboxTarget.checked ? "完了" : "アクティブ"
+    // this.statusTarget.textContent = this.checkboxTarget.checked ? "完了" : "アクティブ"
     this.element.requestSubmit()
   }
 
@@ -19,6 +19,6 @@ export default class extends Controller {
     }
 
     this.checkboxTarget.checked = this.savedValue
-    this.statusTarget.textContent = this.savedValue ? "完了" : "アクティブ"
+    // this.statusTarget.textContent = this.savedValue ? "完了" : "アクティブ"
   }
 }
