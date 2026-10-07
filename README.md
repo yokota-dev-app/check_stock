@@ -1,24 +1,2 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# 目的・背景
+旅行や泊まりの出張など、持ち物をしっかり準びする必要があるが、持っていくものが多い、かつ頻度が高くないため何を持っていくべきかを都度
