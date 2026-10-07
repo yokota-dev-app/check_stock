@@ -11,7 +11,10 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.1].define(version: 2026_10_06_133156) do
-  create_table "items", charset: "utf8mb4", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+
+  create_table "items", force: :cascade do |t|
     t.string "name", null: false
     t.boolean "is_checked", default: false, null: false
     t.bigint "list_id"
@@ -20,7 +23,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_06_133156) do
     t.index ["list_id"], name: "index_items_on_list_id"
   end
 
-  create_table "lists", charset: "utf8mb4", force: :cascade do |t|
+  create_table "lists", force: :cascade do |t|
     t.string "title", null: false
     t.text "memo"
     t.integer "category"
@@ -32,7 +35,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_06_133156) do
     t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
-  create_table "template_items", charset: "utf8mb4", force: :cascade do |t|
+  create_table "template_items", force: :cascade do |t|
     t.string "name", null: false
     t.boolean "is_checked", default: false, null: false
     t.bigint "template_list_id"
@@ -41,7 +44,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_06_133156) do
     t.index ["template_list_id"], name: "index_template_items_on_template_list_id"
   end
 
-  create_table "template_lists", charset: "utf8mb4", force: :cascade do |t|
+  create_table "template_lists", force: :cascade do |t|
     t.string "title", null: false
     t.text "memo"
     t.integer "category"
@@ -52,7 +55,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_06_133156) do
     t.index ["user_id"], name: "index_template_lists_on_user_id"
   end
 
-  create_table "users", charset: "utf8mb4", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
     t.string "first_name", null: false
