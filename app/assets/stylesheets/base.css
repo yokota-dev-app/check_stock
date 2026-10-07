@@ -45,13 +45,148 @@ input[type="checkbox"] {
   accent-color: var(--accent);
 }
 
-.top-wrapper {
+/* .top-wrapper {
   background-image: none;
   background-color: #e2e9e6;
   flex: 1 0 auto;
   display: grid;
   place-items: center;
   padding: 48px 24px;
+} */
+
+/* 全体コンテナ */
+.top-wrapper {
+  background-color: #e2e9e6;
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+}
+
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;
+  width: 100%;
+  gap: 48px;
+}
+
+/* 左側：コンテンツ領域 */
+.hero-content {
+  flex: 1;
+  max-width: 580px;
+  color: #18332d;
+}
+
+.app-badge {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #18332d;
+  background-color: rgba(24, 51, 45, 0.1);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  letter-spacing: 0.05em;
+}
+
+.hero-title {
+  margin: 0 0 20px;
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.hero-description {
+  margin: 0 0 32px;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #2c4d44;
+}
+
+/* ボタンエリア */
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 150ms ease;
+}
+
+/* メインボタン（新規登録） */
+.btn-primary {
+  background-color: #18332d;
+  color: #ffffff;
+  border: 1px solid #18332d;
+  box-shadow: 0 4px 12px rgba(24, 51, 45, 0.15);
+}
+
+.btn-primary:hover {
+  background-color: #244a42;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(24, 51, 45, 0.2);
+}
+
+/* サブボタン（ログイン） */
+.btn-outline {
+  background-color: transparent;
+  color: #18332d;
+  border: 1px solid #18332d;
+}
+
+.btn-outline:hover {
+  background-color: rgba(24, 51, 45, 0.05);
+}
+
+/* 右側：画像領域 */
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  max-width: 480px;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  /* イラスト画像などの影つき演出（不要な場合は削除可能） */
+  filter: drop-shadow(0 12px 24px rgba(24, 51, 45, 0.1));
+}
+
+/* レスポンシブ（スマホ・タブレット対応） */
+@media (max-width: 868px) {
+  .hero-container {
+    flex-direction: column-reverse; /* スマホではテキストを上、画像を下に配置 */
+    text-align: center;
+    gap: 32px;
+  }
+
+  .hero-title {
+    font-size: 1.75rem;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-image img {
+    max-height: 280px;
+  }
 }
 
 .top-wrapper .guide-area {

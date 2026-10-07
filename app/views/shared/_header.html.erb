@@ -6,7 +6,7 @@
 
     <ul class="nav-menu">
       <li class="nav-item has-dropdown">
-        <%= link_to '持ち物リスト', lists_path, class: 'nav-link' %>
+        <%= link_to 'マイリスト', lists_path, class: 'nav-link' %>
       </li>
 
       <li class="nav-item has-dropdown">
@@ -20,7 +20,6 @@
         <ul class="dropdown-menu dropdown-menu-right">
           <li class="dropdown-user-name"><%= current_user.decorate.full_name %></li>
           <li class="dropdown-divider"></li>
-          <li><%= link_to 'プロフィール', '#', class: 'dropdown-item' %></li>
           <li><%= link_to 'ログアウト', logout_path, class: 'dropdown-item', data: { turbo_method: :delete } %></li>
         </ul>
       </li>
