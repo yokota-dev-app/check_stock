@@ -1,0 +1,22 @@
+<%# locals: delete_path:, make_template_path: (任意) %>
+<div class="kebab-menu" data-controller="kebab-menu" data-action="click@window->kebab-menu#closeOutside keydown.esc->kebab-menu#close">
+  <button type="button" class="kebab-menu-toggle" aria-label="メニューを開く" aria-haspopup="true" aria-expanded="false"
+          data-kebab-menu-target="toggle" data-action="kebab-menu#toggle">
+    <span aria-hidden="true">&#8942;</span>
+  </button>
+  <ul class="kebab-menu-list" role="menu" data-kebab-menu-target="menu" hidden>
+    <% if local_assigns[:make_template_path] %>
+      <li role="none">
+        <%= button_to "テンプレート化", make_template_path, method: :post, class: "kebab-menu-item", role: "menuitem",
+              form: { data: { turbo_confirm: "テンプレート化してもよろしいでしょうか？" } } %>
+      </li>
+    <% end %>
+    <li role="none">
+      <button type="button" class="kebab-menu-item" role="menuitem" data-action="kebab-menu#edit">編集</button>
+    </li>
+    <li role="none">
+      <%= button_to "削除", delete_path, method: :delete, class: "kebab-menu-item kebab-menu-danger", role: "menuitem",
+            form: { data: { turbo_confirm: "削除してもよろしいでしょうか？" } } %>
+    </li>
+  </ul>
+</div>

@@ -1002,3 +1002,64 @@ button.item-delete-button:hover {
     padding: 16px;
   }
 }
+
+/* 3点メニュー */
+.kebab-menu {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.kebab-menu-toggle {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.kebab-menu-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 20;
+  min-width: 150px;
+  margin: 0;
+  padding: 4px 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgb(23 45 39 / 12%);
+  list-style: none;
+}
+
+.kebab-menu-list[hidden] {
+  display: none;
+}
+
+.kebab-menu-list form {
+  margin: 0;
+}
+
+.kebab-menu-item {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kebab-menu-item:hover {
+  background: var(--surface-raised);
+}
+
+.kebab-menu-danger {
+  color: var(--danger);
+}

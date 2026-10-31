@@ -68,6 +68,7 @@
                 </div>
               <% end %>
             </div>
+            <%= render "shared/kebab_menu", delete_path: template_list_path(template_list) %>
           </header>
           <% if flash[:item_error_template_list_id] == template_list.id %>
             <p class="item-add-errors" role="alert"><%= flash[:item_error] %></p>

@@ -87,11 +87,7 @@
                 %>
               </div>
             <% end %>
-            <%= button_to "テンプレート化", make_template_list_path(list),
-                  method: :post,
-                  class: "list-template-button",
-                  form: { data: { turbo_confirm: "テンプレート化してもよろしいでしょうか？" } }
-            %>
+            <%= render "shared/kebab_menu", make_template_path: make_template_list_path(list), delete_path: list_path(list) %>
           </header>
 
           <% if flash[:item_error_list_id] == list.id %>
