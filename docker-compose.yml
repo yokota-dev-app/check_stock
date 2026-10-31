@@ -9,11 +9,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "15432:5432"
 
   web:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3001 -b '0.0.0.0'"
     container_name: runteq_normal_curriculum_container
     tty: true
     stdin_open: true
@@ -29,7 +29,7 @@ services:
       DATABASE_USER: postgres
       DATABASE_PASSWORD: password
     ports:
-      - "3000:3000"
+      - "3001:3001"
     depends_on:
       - db
       - chrome
@@ -37,7 +37,7 @@ services:
   chrome:
     image: selenium/standalone-chromium
     ports:
-      - "4444:4444"
+      - "14444:4444"
 
 volumes:
   postgres_data:
