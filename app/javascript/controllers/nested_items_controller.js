@@ -7,6 +7,17 @@ export default class extends Controller {
     const index = this.fieldsTarget.querySelectorAll("[data-item-field]").length
     const fields = this.templateTarget.innerHTML.replaceAll("NEW_RECORD", String(index))
     this.fieldsTarget.insertAdjacentHTML("beforeend", fields)
+    this.keepFirstLabelOnly()
+  }
+
+  keepFirstLabelOnly() {
+    this.fieldsTarget.querySelectorAll("[data-item-field]").forEach((field, index) => {
+      if (index === 0) return
+      const label = field.querySelector("label")
+      if (!label) return
+      field.querySelector("input")?.setAttribute("aria-label", label.textContent.trim())
+      label.remove()
+    })
   }
 
   applyTemplate(event) {
@@ -21,6 +32,7 @@ export default class extends Controller {
       template.content.querySelector('input[name$="[name]"]').value = name
       this.fieldsTarget.append(template.content)
     })
+    this.keepFirstLabelOnly()
 
     if (items.length === 0) this.add()
   }
