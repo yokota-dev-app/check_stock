@@ -2,7 +2,7 @@
   <% if @template_lists.present? %>
     <aside class="list-sidebar" aria-label="テンプレート一覧">
       <div class="list-sidebar-header">
-        <h1>テンプレート</h1>
+        <h1><span class="section-badge">テンプレート</span></h1>
         <div data-controller="dialog">
           <button type="button" class="dialog-open-button" data-action="dialog#open">新規作成</button>
           <dialog class="create-dialog" data-dialog-target="dialog" aria-labelledby="new-template-list-dialog-title">
@@ -69,16 +69,15 @@
               <% end %>
             </div>
           </header>
+          <% if flash[:item_error_template_list_id] == template_list.id %>
+            <p class="item-add-errors" role="alert"><%= flash[:item_error] %></p>
+          <% end %>
           <%= form_with url: template_list_template_items_path(template_list), scope: :template_item, class: "item-add-form" do |template_item_form| %>
             <%= template_item_form.text_field :name,
-                  value: @new_template_item_template_list_id == template_list.id ? @new_template_item_name : nil,
                   placeholder: "追加する項目",
                   aria: { label: "追加する項目" }
             %>
             <%= template_item_form.submit "追加" %>
-          <% end %>
-          <% if @new_template_item_template_list_id == template_list.id && @new_template_item_errors.present? %>
-            <p class="item-add-errors"><%= @new_template_item_errors.to_sentence %></p>
           <% end %>
           <ul class="list-detail-items">
             <% template_list.template_items.each do |template_item| %>

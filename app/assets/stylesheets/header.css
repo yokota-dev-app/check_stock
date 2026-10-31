@@ -173,3 +173,35 @@ body {
     height: 32px;
   }
 }
+
+/* 現在のセクション表示 */
+.nav-link.active {
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+}
+
+body.section-template {
+  --accent: #5b4bb7;
+  --accent-strong: #463a96;
+}
+
+body.section-template .site-header {
+  border-top: 4px solid var(--accent);
+}
+
+body:not(.section-template) .site-header {
+  border-top: 4px solid var(--accent);
+}
+
+.section-badge {
+  display: inline-block;
+  padding: 2px 12px;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--accent);
+  font-size: 1rem;
+}
+
+body.section-template .list-sidebar {
+  background: #f5f3fc;
+}

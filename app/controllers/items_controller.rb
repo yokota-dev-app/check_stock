@@ -4,13 +4,11 @@ class ItemsController < ApplicationController
     item = list.items.build(create_item_params)
 
     if item.save
-      redirect_to lists_path, status: :see_other
+      redirect_to lists_path(selected_list_id: list.id), status: :see_other
     else
-      @lists = current_user.lists.includes(:items)
-      @new_item_list_id = list.id
-      @new_item_name = item.name
-      @new_item_errors = item.errors.full_messages
-      render "lists/index", status: :unprocessable_entity
+      flash[:item_error_list_id] = list.id
+      flash[:item_error] = item.errors.include?(:name) && item.name.blank? ? "項目を追加してください" : item.errors.full_messages.to_sentence
+      redirect_to lists_path(selected_list_id: list.id), status: :see_other
     end
   end
 

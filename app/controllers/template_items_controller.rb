@@ -4,13 +4,11 @@ class TemplateItemsController < ApplicationController
     template_item = template_list.template_items.build(create_template_item_params)
 
     if template_item.save
-      redirect_to template_lists_path, status: :see_other
+      redirect_to template_lists_path(selected_template_list_id: template_list.id), status: :see_other
     else
-      @template_lists = current_user.template_lists.includes(:template_items)
-      @new_template_item_template_list_id = template_list.id
-      @new_template_item_name = template_item.name
-      @new_template_item_errors = template_item.errors.full_messages
-      render "template_lists/index", status: :unprocessable_entity
+      flash[:item_error_template_list_id] = template_list.id
+      flash[:item_error] = template_item.errors.include?(:name) && template_item.name.blank? ? "項目を追加してください" : template_item.errors.full_messages.to_sentence
+      redirect_to template_lists_path(selected_template_list_id: template_list.id), status: :see_other
     end
   end
 

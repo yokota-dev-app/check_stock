@@ -6,11 +6,11 @@
 
     <ul class="nav-menu">
       <li class="nav-item has-dropdown">
-        <%= link_to 'マイリスト', lists_path, class: 'nav-link' %>
+        <%= link_to 'マイリスト', lists_path, class: ['nav-link', ('active' if controller_name == 'lists')], aria: { current: (controller_name == 'lists' ? 'page' : nil) } %>
       </li>
 
       <li class="nav-item has-dropdown">
-        <%= link_to 'テンプレート', template_lists_path, class: 'nav-link' %>
+        <%= link_to 'テンプレート', template_lists_path, class: ['nav-link', ('active' if controller_name.start_with?('template_'))], aria: { current: (controller_name.start_with?('template_') ? 'page' : nil) } %>
       </li>
 
       <li class="nav-item has-dropdown">
