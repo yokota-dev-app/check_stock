@@ -1044,22 +1044,29 @@ button.item-delete-button:hover {
   margin: 0;
 }
 
-.kebab-menu-item {
+.kebab-menu-list .kebab-menu-item,
+.kebab-menu-list button.kebab-menu-item[type="submit"] {
   display: block;
   width: 100%;
+  min-height: 0;
   padding: 8px 16px;
   border: 0;
+  border-radius: 0;
   background: transparent;
   color: var(--ink);
   font: inherit;
+  font-weight: 400;
   text-align: left;
   cursor: pointer;
+  transform: none;
 }
 
-.kebab-menu-item:hover {
+.kebab-menu-list .kebab-menu-item:hover,
+.kebab-menu-list button.kebab-menu-item[type="submit"]:hover {
   background: var(--surface-raised);
 }
 
-.kebab-menu-danger {
+.kebab-menu-list .kebab-menu-danger,
+.kebab-menu-list button.kebab-menu-danger[type="submit"] {
   color: var(--danger);
 }
